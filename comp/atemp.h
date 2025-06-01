@@ -6,6 +6,7 @@
 #include<algorithm>
 #include <cstring>
 #include<queue>
+#include<numeric>
 using namespace std;
 #define int long long
 #define pii pair<int,int>
