@@ -9,11 +9,11 @@ struct DSU{
         }
     }
     //with path compression
-    int get(int x) { return (par[x] == x ? x : (par[x] = get(par[x]))); }
+    int get(int x) { return (par[x] == x ? x : (par[x] = find(par[x]))); }
     //small to large merging
     void merge(int a, int b) {
-        a = get(a);
-        b = get(b);
+        a = find(a);
+        b = find(b);
         if(a == b) return;
         if(sz[a] > sz[b]) {
             swap(a, b);
