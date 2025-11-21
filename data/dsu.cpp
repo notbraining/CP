@@ -11,7 +11,7 @@ struct DSU{
     //with path compression
     int get(int x) { return (par[x] == x ? x : (par[x] = get(par[x]))); }
     //small to large merging
-    void merge(int a, int b) {
+    void uni(int a, int b) {
         a = get(a);
         b = get(b);
         if(a == b) return;
