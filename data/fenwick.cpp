@@ -1,24 +1,28 @@
-void update(int pos, int value, vector<int>& v){
-    while(pos < v.size()){
-        v[pos] += value;
-        pos += ((pos) & (-pos));
+struct fenwick{
+    vector<int>v;
+    int size;
+    fenwick(int sz){
+        size = sz;
+        v = vector<int>(sz + 1);
     }
-}
-int query(int pos, vector<int>& v){
-    int ans = 0;
-    while(pos > 0){
-        ans += v[pos];
-        pos -= pos & (-pos);
+
+    int query(int l, int r){
+        return query(r) - query(l - 1);
     }
-    return ans;
-}
-int32_t main(){
-    int n;
-    cin >> n;
-    vector<int>v(n + 1, 0);
-    for(int i = 1; i <= n; ++i){
-        int num;
-        cin >> num;
-        update(i, num, v);
+    void update(int pos, int val){
+        while(pos < v.size()){
+            v[pos] += val;
+            //v[pos] %= MOD;
+            pos += pos & (-pos);
+        }
     }
-}
+    int query(int pos){
+        int ans = 0;
+        while(pos > 0){
+            ans += v[pos];
+            //ans %= MOD;
+            pos -= pos & (-pos);
+        }
+        return ans;
+    }
+};
