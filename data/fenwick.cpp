@@ -7,7 +7,7 @@ struct fenwick{
     }
 
     int query(int l, int r){
-        return query(r) - query(l - 1);
+        return (query(r) - query(l - 1)+MOD)%MOD;
     }
     void update(int pos, int val){
         while(pos < v.size()){
