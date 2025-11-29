@@ -12,6 +12,9 @@ int fastpow(int base, int power){
         return (f) * (f) % MOD * base % MOD;
     }
 }
+int inv(int x){
+    return fastpow(x, MOD - 2) % MOD;
+}
 	choose[0][0] = 1;
 	for (i = 1; i <= n / 2; ++i) {
 		choose[i][0] = 1;
