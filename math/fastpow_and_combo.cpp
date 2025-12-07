@@ -12,6 +12,17 @@ int fastpow(int base, int power){
         return (f) * (f) % MOD * base % MOD;
     }
 }
+//iterative fastpow (should be faster by a lot)
+int fastpow(int base, int p){
+    int ans = 1;
+    for(int i = 0; (1LL << i) <= p; i++){
+        if(p & (1LL << i)){
+            (ans *= base) %= m;
+        }
+        (base *= base) %= m;
+    }
+    return ans;
+}
 int inv(int x){
     return fastpow(x, MOD - 2) % MOD;
 }
