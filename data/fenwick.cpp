@@ -6,6 +6,7 @@ struct fenwick{
         v = vector<int>(sz + 1);
     }
 
+
     int query(int l, int r){
         return (query(r) - query(l - 1)+MOD)%MOD;
     }
@@ -16,6 +17,7 @@ struct fenwick{
             pos += pos & (-pos);
         }
     }
+//TIP: update gets INF loop if pos = 0, make sure all inputs are between 1 and n
     int query(int pos){
         int ans = 0;
         while(pos > 0){
