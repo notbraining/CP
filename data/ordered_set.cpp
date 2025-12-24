@@ -5,8 +5,9 @@ using namespace std;
 template <class T>
 using ordered_set =
     tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+#define int long long
 #define pii pair<int,int>
-int main(){
+int32_t main(){
   ordered_set<int>o;
   o.insert(1);
   o.insert(3);
