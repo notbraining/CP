@@ -17,9 +17,9 @@ int fastpow(int base, int p){
     int ans = 1;
     for(int i = 0; (1LL << i) <= p; i++){
         if(p & (1LL << i)){
-            (ans *= base) %= m;
+            ans = ans * base % MOD;
         }
-        (base *= base) %= m;
+        base = base * base % MOD;
     }
     return ans;
 }
