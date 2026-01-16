@@ -21,7 +21,7 @@ struct fenwick{
             pos += pos & (-pos);
         }
     }
-//TIP: update gets INF loop if pos = 0, make sure all inputs are between 1 and n
+// INF loop if pos = 0,all inputs msust between 1 and n
     int prefix_query(int pos){
         int ans = 0;
         while(pos > 0){
