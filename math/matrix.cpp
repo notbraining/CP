@@ -23,3 +23,14 @@ struct Matrix{
         return product;
     }
 };
+Matrix fastpow(Matrix a, int p){
+    Matrix product;
+    product.I();
+    for(int i = 0; (1LL << i) <= p; ++i){
+        if((1LL << i) & p){
+            product = product * a;
+        }
+        a = a * a;
+    }
+    return product;
+}
