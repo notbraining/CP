@@ -1,67 +1,52 @@
-/*
-Note: segtree with all assocative operations can actually be represented by a fenwick if you represent updates as prefix sums accumulating (differance array)
-
-  */
 struct segtree{
+    int n;
     vector<int>t;
     vector<int>lazy;
-    int n;
     segtree(int n_){
-        n_ += 10;
         n = n_;
-        t = vector<int>(4 * n + 20, 0);
-        lazy = t;
+        t = vector<int>(4 * n + 2, 0);
+        lazy = vector<int>(4 * n + 2, 0);
     }
-    void push(int node){
+    void push(int tl, int tr, int node){
         lazy[node * 2] += lazy[node];
         lazy[node * 2 + 1] += lazy[node];
-        t[node * 2] += lazy[node];
-        t[node * 2 + 1] += lazy[node];
+        int mid = (tl + tr) / 2;
+        t[node * 2] += lazy[node] * (mid - tl + 1);
+        t[node * 2 + 1] += lazy[node] * (tr - mid);
+
         lazy[node] = 0;
     }
-    int query(int tl, int tr, int node, int ql, int qr){
-        if(qr < tl || tr < ql){
-            return 0;
-        }
-        if(ql <= tl && tr <= qr){
-            return t[node];
-        }
-        push(node);
-        int mid = (tl + tr) / 2;
-        return query(tl, mid, node * 2, ql, qr) + query(mid + 1, tr, node * 2 + 1, ql, qr);
-    }
     void update(int tl, int tr, int node, int ul, int ur, int x){
-        if(tr < ul || ur < tl){
+
+        if(ur < tl || tr < ul){
             return;
         }
         if(ul <= tl && tr <= ur){
-            t[node] += x;
+            t[node] += (tr - tl + 1) * x;
             lazy[node] += x;
             return;
         }
-        push(node);
+        push(tl, tr, node);
         int mid = (tl + tr) / 2;
         update(tl, mid, node * 2, ul, ur, x);
         update(mid + 1, tr, node * 2 + 1, ul, ur, x);
         t[node] = t[node * 2] + t[node * 2 + 1];
     }
+    void update(int l, int r, int x){
+        update(1, n, 1, l, r, x);
+    }
+    int query(int tl, int tr, int node, int ql, int qr){
+        if(tr < ql || qr < tl){
+            return 0;
+        }
+        if(ql <= tl && tr <= qr){
+            return t[node];
+        }
+        push(tl, tr, node);
+        int mid = (tl + tr) / 2;
+        return query(tl, mid, node * 2, ql, qr) + query(mid + 1, tr, node * 2 + 1, ql, qr);
+    }
     int query(int ql, int qr){
         return query(1, n, 1, ql, qr);
     }
-    void update(int ul, int ur, int x){
-        update(1, n, 1, ul, ur, x);
-    }
 };
-
-void dfs(int node, int par){
-    tim++;
-    ord[tim] = node;
-    startingval[node] = tim;
-    pos[node] = tim;
-    for(int j : adj[node]){
-        if(j == par)
-            continue;
-        dfs(j, node);
-    }
-    endingval[node] = tim;
-}
