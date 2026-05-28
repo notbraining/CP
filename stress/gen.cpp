@@ -16,7 +16,6 @@
 #include <unordered_set>
 #include <vector>
 using namespace std;
-#define int long long
 #define pii pair<int, int>
 #define LL long long
 int rnd(int a, int b) { return a + rand() % (b - a + 1); }
