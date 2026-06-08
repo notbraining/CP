@@ -28,6 +28,7 @@
     why? draw out the convex hull. if the cut is before the min place in the hull, the premin will not be able to min with the minimum, since the min is already cut out
     however, if you cut before the min, you'll only keep a straight line in the suffmin, cut, flip. thus, if you cut before the min, just reset everything to a line
 
+    TLDR; the only case when they are not equal is when cut is before the min of the convex, but then in that case both will be a flat line at the y = min value
 */
 #include<iostream>
 #include<vector>
