@@ -1,4 +1,34 @@
+/*
+    solution sketch + explanation:
 
+    currently my code does:
+    
+    cut, flip, add, suffmin , find the answer , cut, flip, add, suffmin 
+
+    Now heres what USACO solution does:
+    cut flip premin,  add , cut flip premin --> find ans,   add , cut, flip,  premin
+
+    so the first premin doesn't do anything though, we can delete it
+
+    now its 
+    
+    cut flip add cut flip premin, add cut flip premin, add cut flip premin, add cut flip premin
+    now they took advantage and moved suffmin to AFTER flip and cut, only now you need to do premin instead
+
+
+    in a way, I  computed the answer after the adding and suffmining. 
+
+    however, its hard to find out where wi is right now. so let just wait until its easy --> when is it easy? when we need to cut at wi!
+
+    so when we cut and flip along axis wi, the original value (dp[wi]) is at the beginning. 
+    
+    only wait, we should have suffmined the data structure. before we output the answer, make sure to premin
+
+    only wait! you may notice that if we cut BEFORE the minium point, applying cut, flip premin will be different compared to suffmin cut flip
+    why? draw out the convex hull. if the cut is before the min place in the hull, the premin will not be able to min with the minimum, since the min is already cut out
+    however, if you cut before the min, you'll only keep a straight line in the suffmin, cut, flip. thus, if you cut before the min, just reset everything to a line
+
+*/
 #include<iostream>
 #include<vector>
 #include<set>
