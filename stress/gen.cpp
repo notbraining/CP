@@ -24,4 +24,14 @@ int32_t main(int argc, char* argv[]) {
   cin.tie(NULL);
   int seed = atoi(argv[1]);
   srand(seed);
+
+  int n= rnd(1,10);
+  cout<<n<<"\n";
+  for(int i= 0; i<n; ++i){
+    cout<<rnd(0,10)<<" ";
+  }
+  
+
+
+  
 }
